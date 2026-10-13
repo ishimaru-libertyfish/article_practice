@@ -1,0 +1,33 @@
+<h1>投稿編集</h1>
+
+<%= form_with(model: @article, local: true, url: article_path, data: { turbo: false }) do |form| %>
+    <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+          <ul>
+            <% @article.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :タイトル %>
+      <%= form.text_field :title, id: :article_title %>
+    </div>
+
+    <div class="field">
+      <%= form.label :投稿内容 %>
+      <%= form.text_area :content, id: :article_content %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit '投稿更新' %>
+    </div>
+<% end %>
+
+<div>
+  <%= link_to "投稿詳細へ戻る", article_path(@article) %>
+</div>
